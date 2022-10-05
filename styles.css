@@ -1,0 +1,43 @@
+.flex {
+    display: flex;
+    background:lightblue;
+    height: 60vh;
+}
+
+.left-container {
+    padding: 5px;
+    width: 60%;
+    height: 100%;
+}
+
+.right-container {
+    width: 40%;
+    height: 100%;
+}
+
+.left-box {
+    background: lightgray;
+    height: 100%;
+}
+
+.right-upper-container {
+    width: 100%;
+    height: 40%;
+    padding: 5px;
+}
+
+.right-lower-container {
+    width: 100%;
+    height: 60%;
+    padding: 5px;
+}
+
+.right-upper-box {
+    background: lightgray;
+    height: 100%;
+}
+
+.right-lower-box {
+    background: lightgray;
+    height: 100%;
+}
