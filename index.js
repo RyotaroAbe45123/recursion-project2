@@ -35,3 +35,12 @@ rightLowerBox.classList.add("right-lower-box");
 
 rightUpperContainer.append(rightUpperBox);
 rightLowerContainer.append(rightLowerBox);
+
+const numbers = [...Array(9)].map((_, i) => i+1);
+console.log(numbers);
+numbers.forEach((i) => {
+    const button = document.createElement("button");
+    button.classList.add("btn", `btn-${i}`)
+    button.innerHTML = i;
+    rightLowerBox.append(button)
+})
