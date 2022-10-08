@@ -1,13 +1,17 @@
 const root = document.getElementById("root");
 
+// container
 const backgroundContainer = document.createElement("div");
 backgroundContainer.classList.add("container-fluid", "bg-info", "background");
 backgroundContainer.style.height = "50vh";
 backgroundContainer.style.marginTop = "100px"
+root.append(backgroundContainer);
 
+// row
 const row = document.createElement("div");
 row.classList.add("row", "justify-content-center", "align-items-center", "text-center");
 row.style.height = "100%";
+backgroundContainer.append(row);
 
 // left container
 const leftColumn = document.createElement("div");
@@ -45,22 +49,21 @@ rightUpperColumn.append(rightUpperBox);
 
 // right lower
 const rightLowerRow = document.createElement("div");
-rightLowerRow.classList.add("row", "bg-secondary");
+rightLowerRow.classList.add("row");
 rightLowerRow.style.height = "60%"
 rightColumn.append(rightLowerRow);
 
 const rightLowerColumn = document.createElement("div");
 rightLowerColumn.classList.add("col");
+rightLowerColumn.style.padding = "10px";
 rightLowerRow.append(rightLowerColumn);
 
+const rightLowerBox = document.createElement("div");
+rightLowerBox.classList.add("bg-light");
+rightLowerBox.style.height = "100%";
+rightLowerColumn.append(rightLowerBox);
 
 
-// rightRow.append(rightUpperRow);
-// rightRow.append(rightLowerRow);
 
-// backgroundContainer.append(leftRow);
-backgroundContainer.append(row);
-
-root.append(backgroundContainer);
 
 
