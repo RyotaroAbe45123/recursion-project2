@@ -9,6 +9,7 @@ const row = document.createElement("div");
 row.classList.add("row", "justify-content-center", "align-items-center", "text-center");
 row.style.height = "100%";
 
+// left container
 const leftColumn = document.createElement("div");
 leftColumn.classList.add("col-8");
 leftColumn.style.height = "100%"
@@ -20,24 +21,29 @@ leftBox.classList.add("bg-light")
 leftBox.style.height = "100%"
 leftColumn.append(leftBox);
 
-// const rightRow = document.createElement("div");
-// rightRow.classList.add("row");
+// right container
 const rightColumn = document.createElement("div");
 rightColumn.classList.add("col-4");
 rightColumn.style.height = "100%";
-// rightColumn.style.width = "50%"
-// rightRow.append(rightColumn);
 row.append(rightColumn);
 
+// right upper
 const rightUpperRow = document.createElement("div");
-rightUpperRow.classList.add("row", "bg-light");
+rightUpperRow.classList.add("row");
 rightUpperRow.style.height = "40%"
 rightColumn.append(rightUpperRow);
 
 const rightUpperColumn = document.createElement("div");
 rightUpperColumn.classList.add("col");
+rightUpperColumn.style.padding = "10px";
 rightUpperRow.append(rightUpperColumn);
 
+const rightUpperBox = document.createElement("div");
+rightUpperBox.classList.add("bg-light");
+rightUpperBox.style.height = "100%";
+rightUpperColumn.append(rightUpperBox);
+
+// right lower
 const rightLowerRow = document.createElement("div");
 rightLowerRow.classList.add("row", "bg-secondary");
 rightLowerRow.style.height = "60%"
