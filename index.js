@@ -72,15 +72,8 @@ buttonContainer.style.justifyContent = "space-evenly"
 buttonContainer.style.height = "100%"
 rightLowerBox.append(buttonContainer)
 
-// rc = document.createElement("div")
-// rc.classList.add("col-4");
+// button numbers array
 const numbers = [...Array(3)].map((_, i) => i+1);
-// numbers.forEach((i) => {
-//     const button = document.createElement("div");
-//     button.classList.add("col-4")
-//     button.innerHTML = i;
-//     r.append(button)
-// })
 numbers.forEach((i) => {
     const r = document.createElement("div");
     // r.classList.add("row", "row-cols-3")
