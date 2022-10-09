@@ -90,20 +90,3 @@ numbers.forEach((i) => {
         buttonRow.append(buttonColumn);
     })
 })
-// numbers.forEach((i) => {
-//     const button = document.createElement("div");
-//     button.classList.add("col-4")
-//     button.innerHTML = i;
-//     r.append(button)
-// })
-
-// button
-// const numbers = [...Array(9)].map((_, i) => i+1);
-// numbers.forEach((i) => {
-//     const button = document.createElement("button");
-//     button.classList.add("btn", "btn-primary", `btn-${i}`)
-//     button.innerHTML = i;
-//     rightLowerBox.append(button)
-// })
-
-
