@@ -63,7 +63,57 @@ rightLowerBox.classList.add("bg-light");
 rightLowerBox.style.height = "100%";
 rightLowerColumn.append(rightLowerBox);
 
+// buttons container
+const buttonContainer = document.createElement("div")
+buttonContainer.classList.add("container")
+buttonContainer.style.display = "flex"
+buttonContainer.style.flexDirection = "column"
+buttonContainer.style.justifyContent = "space-evenly"
+buttonContainer.style.height = "100%"
+rightLowerBox.append(buttonContainer)
 
+// rc = document.createElement("div")
+// rc.classList.add("col-4");
+const numbers = [...Array(3)].map((_, i) => i+1);
+// numbers.forEach((i) => {
+//     const button = document.createElement("div");
+//     button.classList.add("col-4")
+//     button.innerHTML = i;
+//     r.append(button)
+// })
+numbers.forEach((i) => {
+    const r = document.createElement("div");
+    // r.classList.add("row", "row-cols-3")
+    r.classList.add("row", "justify-content-center", "align-items-center", "text-center");
+    // r.style.height = "auto"
+    // r.style.minHeight = "33%"
+    c.append(r);
+    numbers.forEach((j) => {
+        const d = document.createElement("div");
+        d.classList.add("col-4");
+        // d.innerHTML = `${i}-${j}`;
+        const button = document.createElement("button");
+        button.classList.add("btn", "btn-primary", `btn-${i}`)
+        button.innerHTML = `${i * j}`
+        // button.style.minHeight = "75%"
+        d.append(button);
+        r.append(d);
+    })
+})
+// numbers.forEach((i) => {
+//     const button = document.createElement("div");
+//     button.classList.add("col-4")
+//     button.innerHTML = i;
+//     r.append(button)
+// })
 
+// button
+// const numbers = [...Array(9)].map((_, i) => i+1);
+// numbers.forEach((i) => {
+//     const button = document.createElement("button");
+//     button.classList.add("btn", "btn-primary", `btn-${i}`)
+//     button.innerHTML = i;
+//     rightLowerBox.append(button)
+// })
 
 
