@@ -75,22 +75,21 @@ rightLowerBox.append(buttonContainer)
 // button numbers array
 const numbers = [...Array(3)].map((_, i) => i+1);
 numbers.forEach((i) => {
-    const r = document.createElement("div");
-    // r.classList.add("row", "row-cols-3")
-    r.classList.add("row", "justify-content-center", "align-items-center", "text-center");
-    // r.style.height = "auto"
-    // r.style.minHeight = "33%"
-    c.append(r);
+    // button row
+    const buttonRow = document.createElement("div");
+    buttonRow.classList.add("row")
+    buttonContainer.append(buttonRow);
     numbers.forEach((j) => {
-        const d = document.createElement("div");
-        d.classList.add("col-4");
+        const buttonColumn = document.createElement("div");
+        // d.classList.add("col-4");
+        buttonColumn.classList.add("col")
         // d.innerHTML = `${i}-${j}`;
         const button = document.createElement("button");
         button.classList.add("btn", "btn-primary", `btn-${i}`)
         button.innerHTML = `${i * j}`
         // button.style.minHeight = "75%"
-        d.append(button);
-        r.append(d);
+        buttonColumn.append(button);
+        buttonRow.append(buttonColumn);
     })
 })
 // numbers.forEach((i) => {
