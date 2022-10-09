@@ -83,8 +83,11 @@ numbers.forEach((i) => {
         // buttons column
         const buttonColumn = document.createElement("div");
         buttonColumn.classList.add("col-4");
+        // buttons
         const button = document.createElement("button");
         button.classList.add("btn", "btn-primary")
+        button.style.height = "50px"
+        button.style.width = "50px"
         button.innerHTML = `${i * j}`
         buttonColumn.append(button);
         buttonRow.append(buttonColumn);
