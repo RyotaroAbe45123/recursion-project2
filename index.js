@@ -1,11 +1,13 @@
-const root = document.getElementById("root");
+// const imgs = require("images.js")
+// import imgs from 'images'
+// const root = document.getElementById("root");
 
 // container
 const backgroundContainer = document.createElement("div");
 backgroundContainer.classList.add("container-fluid", "bg-info", "background");
 backgroundContainer.style.height = "50vh";
 backgroundContainer.style.marginTop = "100px"
-root.append(backgroundContainer);
+// root.append(backgroundContainer);
 
 // row
 const row = document.createElement("div");
@@ -73,23 +75,80 @@ buttonContainer.style.height = "100%"
 rightLowerBox.append(buttonContainer)
 
 // button numbers array
-const numbers = [...Array(3)].map((_, i) => i+1);
-numbers.forEach((i) => {
-    // buttons row
-    const buttonRow = document.createElement("div");
-    buttonRow.classList.add("row")
-    buttonContainer.append(buttonRow);
-    numbers.forEach((j) => {
-        // buttons column
-        const buttonColumn = document.createElement("div");
-        buttonColumn.classList.add("col-4");
-        // buttons
-        const button = document.createElement("button");
-        button.classList.add("btn", "btn-primary")
-        button.style.height = "50px"
-        button.style.width = "50px"
-        button.innerHTML = `${i * j}`
-        buttonColumn.append(button);
-        buttonRow.append(buttonColumn);
+// const numbers = [...Array(3)].map((_, i) => i+1);
+// numbers.forEach((i) => {
+//     // buttons row
+//     const buttonRow = document.createElement("div");
+//     buttonRow.classList.add("row")
+//     buttonContainer.append(buttonRow);
+//     numbers.forEach((j) => {
+//         // buttons column
+//         const buttonColumn = document.createElement("div");
+//         buttonColumn.classList.add("col-4");
+//         // buttons
+//         const button = document.createElement("button");
+//         button.classList.add("btn", "btn-primary")
+//         button.style.height = "50px"
+//         button.style.width = "50px"
+//         const buttonValue = i * j;
+//         button.innerHTML = buttonValue;
+//         button.addEventListener("click", () => onClickButton(buttonValue))
+//         buttonColumn.append(button);
+//         buttonRow.append(buttonColumn);
+//     })
+// })
+
+const onClickButton = (value) => {
+    console.log(value)
+}
+
+const initialize = () => {
+    const root = document.getElementById("root");
+    
+    root.innerHTML = `
+        <div class="d-flex vh-100 justify-content-center align-items-center">
+            <div class="d-flex bg-info flex-wrap col-8">
+                <div id="sliderContainer" class="d-flex col-7 p-2 justify-content-center align-items-center">
+                </div>
+                <div class="col-5 p-2">
+                    <div id="infoContainer"></div>
+                    <div id="buttonContainer"></div>
+                </div>
+            </div>
+        </div>
+    `
+}
+
+const createButtons = () => {
+    const buttonContainer = document.getElementById("buttonContainer");
+    const numbers = [...Array(12)].map((_, i) => i + 1);
+    let htmlString = "";
+    numbers.forEach((number) => {
+        htmlString += `
+            <div class="col-3 text-center p-2">
+                <button class="btn btn-light col-12">${number}</button>
+            </div>
+        `
     })
-})
+    buttonContainer.innerHTML = `
+        <div class="d-flex flex-wrap col-12 px-0 py-2">
+            ${htmlString}
+        </div>    
+    `
+}
+
+
+initialize();
+createButtons();
+
+// imgs = [
+//     {
+//         name: "img1",
+//         path: "img1.jpg"
+//     },
+//     {
+//         name: "img2",
+//         path: "img2.jpg"
+//     },
+// ];
+
