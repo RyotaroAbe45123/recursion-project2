@@ -23,6 +23,11 @@
 }
 
 .image {
-    max-height: 150px;
-    object-fit: scale-down;
+    max-width: 75%;
+    object-fit: contain;
+}
+
+.text {
+    font-size: 36px;
+    font-weight: bold;
 }
