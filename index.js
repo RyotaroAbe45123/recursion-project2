@@ -27,12 +27,17 @@ const images = [
         name: "uranus",
         path: "assets/uranus.jpg"
     },
+    {
+        name: "hoge",
+        diameter: "100",
+        path: "https://upload.wikimedia.org/wikipedia/commons/3/30/Mercury_in_color_-_Prockter07_centered.jpg"
+    }
 ];
 images.forEach((image) => {
     image.component = `
-        <img class="col-10 image" width=100% src=${image.path} alt=${image.name}  />
+        <img class="col-10 image" src=${image.path} alt=${image.name}  />
     `
-})
+});
 
 const initialize = () => {
     const root = document.getElementById("root");
@@ -49,7 +54,7 @@ const initialize = () => {
             </div>
         </div>
     `
-}
+};
 
 const createButtons = () => {
     const buttonContainer = document.getElementById("buttonContainer");
@@ -85,21 +90,20 @@ const createSlider = () => {
 
 const buttonClick = (number) => {
     const index = parseInt(number);
-    slideJump(index, "left")
+    slideJump(index)
 }
 
-const slideJump = (steps, animationType) => {
-    const main = document.getElementById("main");
-    const extra = document.getElementById("extra");
-    const i = parseInt(main.getAttribute("data-index"))
-    const currentElement = document.createElement("div");
-    currentElement.classList.add("d-flex", "justify-content-center")
-    currentElement.innerHTML = `${images[i].component}`
+const createInfoContainer = (index) => {
+    const infoContainer = document.getElementById("infoContainer");
+    infoContainer.innerHTML = `
+        <div>
+            <div>Name: ${images[index-1].name}</div>
+            <div>Diameter: ${images[index-1].diameter} m</div>
+        </div>
+    `
+}
 
-    const nextElement = document.createElement("div");
-    nextElement.classList.add("d-flex", "justify-content-center")
-    nextElement.innerHTML = `${images[steps].component}`
-
+const animateMain = (currentElement, nextElement, animationType) => {
     main.innerHTML = ""
     main.append(nextElement);
     main.classList.add("expand-animation", "full-width");
@@ -108,19 +112,54 @@ const slideJump = (steps, animationType) => {
     extra.append(currentElement);
     extra.classList.add("deplete-animation", "full-width");
 
-    const ss = document.getElementById("sliderShow");
-    ss.innerHTML = ""
-    ss.append(extra);
-    ss.append(main);
+    const sliderShow = document.getElementById("sliderShow");
+    if (animationType === "right") {
+        sliderShow.innerHTML = ""
+        sliderShow.append(extra);
+        sliderShow.append(main);
+    } else {
+        sliderShow.innerHTML = ""
+        sliderShow.append(main);
+        sliderShow.append(extra);
+    }
+};
 
-    main.setAttribute("data-index", steps.toString())
-
+const controlAnimationType = (currentIndex, nextIndex) => {
+    const jumps = nextIndex - currentIndex;
+    const halfLength = images.length / 2;
+    return ((jumps >= 0 && Math.abs(jumps) < halfLength) || (jumps < 0 && Math.abs(jumps) > halfLength))
+        ? "right"
+        : "left"
 }
 
-const animateMain = (currentElement, nextElement, animationType) => {
+const slideJump = (nextIndex) => {
+    const currentIndex = parseInt(main.getAttribute("data-index"))
 
+    const currentElement = document.createElement("div");
+    currentElement.classList.add("d-flex", "justify-content-center");
+    currentElement.innerHTML = currentIndex !==0
+        ? `${images[currentIndex-1].component}`
+        : "";
+
+    const nextElement = document.createElement("div");
+    nextElement.classList.add("d-flex", "justify-content-center");
+    nextElement.innerHTML = `${images[nextIndex-1].component}`;
+
+    const animationType = controlAnimationType(currentIndex, nextIndex);
+    animateMain(currentElement, nextElement, animationType);
+
+    main.setAttribute("data-index", nextIndex.toString())
+
+    createInfoContainer(nextIndex);
 }
 
+
+// execute
 initialize();
 createButtons();
 createSlider();
+
+// global
+const main = document.getElementById("main");
+const extra = document.getElementById("extra");
+
