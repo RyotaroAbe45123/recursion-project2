@@ -1,106 +1,38 @@
-// const imgs = require("images.js")
-// import imgs from 'images'
-// const root = document.getElementById("root");
-
-// container
-const backgroundContainer = document.createElement("div");
-backgroundContainer.classList.add("container-fluid", "bg-info", "background");
-backgroundContainer.style.height = "50vh";
-backgroundContainer.style.marginTop = "100px"
-// root.append(backgroundContainer);
-
-// row
-const row = document.createElement("div");
-row.classList.add("row", "justify-content-center", "align-items-center", "text-center");
-row.style.height = "100%";
-backgroundContainer.append(row);
-
-// left container
-const leftColumn = document.createElement("div");
-leftColumn.classList.add("col-8");
-leftColumn.style.height = "100%"
-leftColumn.style.padding = "10px"
-row.append(leftColumn)
-
-const leftBox = document.createElement("div");
-leftBox.classList.add("bg-light")
-leftBox.style.height = "100%"
-leftColumn.append(leftBox);
-
-// right container
-const rightColumn = document.createElement("div");
-rightColumn.classList.add("col-4");
-rightColumn.style.height = "100%";
-row.append(rightColumn);
-
-// right upper
-const rightUpperRow = document.createElement("div");
-rightUpperRow.classList.add("row");
-rightUpperRow.style.height = "40%"
-rightColumn.append(rightUpperRow);
-
-const rightUpperColumn = document.createElement("div");
-rightUpperColumn.classList.add("col");
-rightUpperColumn.style.padding = "10px";
-rightUpperRow.append(rightUpperColumn);
-
-const rightUpperBox = document.createElement("div");
-rightUpperBox.classList.add("bg-light");
-rightUpperBox.style.height = "100%";
-rightUpperColumn.append(rightUpperBox);
-
-// right lower
-const rightLowerRow = document.createElement("div");
-rightLowerRow.classList.add("row");
-rightLowerRow.style.height = "60%"
-rightColumn.append(rightLowerRow);
-
-const rightLowerColumn = document.createElement("div");
-rightLowerColumn.classList.add("col");
-rightLowerColumn.style.padding = "10px";
-rightLowerRow.append(rightLowerColumn);
-
-const rightLowerBox = document.createElement("div");
-rightLowerBox.classList.add("bg-light");
-rightLowerBox.style.height = "100%";
-rightLowerColumn.append(rightLowerBox);
-
-// buttons container
-const buttonContainer = document.createElement("div")
-buttonContainer.classList.add("container")
-buttonContainer.style.display = "flex"
-buttonContainer.style.flexDirection = "column"
-buttonContainer.style.justifyContent = "space-evenly"
-buttonContainer.style.height = "100%"
-rightLowerBox.append(buttonContainer)
-
-// button numbers array
-// const numbers = [...Array(3)].map((_, i) => i+1);
-// numbers.forEach((i) => {
-//     // buttons row
-//     const buttonRow = document.createElement("div");
-//     buttonRow.classList.add("row")
-//     buttonContainer.append(buttonRow);
-//     numbers.forEach((j) => {
-//         // buttons column
-//         const buttonColumn = document.createElement("div");
-//         buttonColumn.classList.add("col-4");
-//         // buttons
-//         const button = document.createElement("button");
-//         button.classList.add("btn", "btn-primary")
-//         button.style.height = "50px"
-//         button.style.width = "50px"
-//         const buttonValue = i * j;
-//         button.innerHTML = buttonValue;
-//         button.addEventListener("click", () => onClickButton(buttonValue))
-//         buttonColumn.append(button);
-//         buttonRow.append(buttonColumn);
-//     })
-// })
-
-const onClickButton = (value) => {
-    console.log(value)
-}
+const images = [
+    {
+        name: "mercury",
+        path: "assets/mercury.jpg",
+    },
+    {
+        name: "venus",
+        path: "assets/venus.jpg"
+    },
+    {
+        name: "earth",
+        path: "assets/earth.jpg"
+    },
+    {
+        name: "mars",
+        path: "assets/mars.jpg"
+    },
+    {
+        name: "jupiter",
+        path: "assets/jupiter.jpg"
+    },
+    {
+        name: "saturn",
+        path: "assets/saturn.jpg"
+    },
+    {
+        name: "uranus",
+        path: "assets/uranus.jpg"
+    },
+];
+images.forEach((image) => {
+    image.component = `
+        <img class="col-10 image" width=100% src=${image.path} alt=${image.name}  />
+    `
+})
 
 const initialize = () => {
     const root = document.getElementById("root");
@@ -121,11 +53,11 @@ const initialize = () => {
 
 const createButtons = () => {
     const buttonContainer = document.getElementById("buttonContainer");
-    const numbers = [...Array(12)].map((_, i) => i + 1);
+    const numbers = [...Array(images.length)].map((_, i) => i + 1);
     let htmlString = "";
     numbers.forEach((number) => {
         htmlString += `
-            <div class="col-3 text-center p-2">
+            <div class="col-4 text-center p-2">
                 <button class="btn btn-light col-12">${number}</button>
             </div>
         `
@@ -135,20 +67,60 @@ const createButtons = () => {
             ${htmlString}
         </div>    
     `
+    numbers.forEach((number) => {
+        const button = buttonContainer.querySelectorAll(".btn")[number-1]
+        button.addEventListener("click", () => buttonClick(number))
+    })
 }
 
+const createSlider = () => {
+    const sliderContainer = document.getElementById("sliderContainer")
+    sliderContainer.innerHTML = `
+        <div id="sliderShow" class="d-flex col-12">
+            <div id="main" class="main full-width" data-index=0></div>
+            <div id="extra" class="extra full-width"></div>
+        </div>
+    `
+}
+
+const buttonClick = (number) => {
+    const index = parseInt(number);
+    slideJump(index, "left")
+}
+
+const slideJump = (steps, animationType) => {
+    const main = document.getElementById("main");
+    const extra = document.getElementById("extra");
+    const i = parseInt(main.getAttribute("data-index"))
+    const currentElement = document.createElement("div");
+    currentElement.classList.add("d-flex", "justify-content-center")
+    currentElement.innerHTML = `${images[i].component}`
+
+    const nextElement = document.createElement("div");
+    nextElement.classList.add("d-flex", "justify-content-center")
+    nextElement.innerHTML = `${images[steps].component}`
+
+    main.innerHTML = ""
+    main.append(nextElement);
+    main.classList.add("expand-animation", "full-width");
+
+    extra.innerHTML = "";
+    extra.append(currentElement);
+    extra.classList.add("deplete-animation", "full-width");
+
+    const ss = document.getElementById("sliderShow");
+    ss.innerHTML = ""
+    ss.append(extra);
+    ss.append(main);
+
+    main.setAttribute("data-index", steps.toString())
+
+}
+
+const animateMain = (currentElement, nextElement, animationType) => {
+
+}
 
 initialize();
 createButtons();
-
-// imgs = [
-//     {
-//         name: "img1",
-//         path: "img1.jpg"
-//     },
-//     {
-//         name: "img2",
-//         path: "img2.jpg"
-//     },
-// ];
-
+createSlider();
