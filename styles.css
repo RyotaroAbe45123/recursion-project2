@@ -16,3 +16,13 @@
         opacity: 0;
     } 
 }
+
+.full-width {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.image {
+    max-height: 150px;
+    object-fit: scale-down;
+}
